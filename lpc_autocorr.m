@@ -7,7 +7,7 @@ function [a, e] = lpc_autocorr(x)
     %   e: prediction error variance
     
     % Compute autocorrelation vector   
-    p = 20;
+    p = 10;
     R = my_autocorr(x, p);
 
     % Construct autocorrelation matrix

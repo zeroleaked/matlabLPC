@@ -3,7 +3,7 @@ function y = analysis_synthesis(x)
     % mengatur frameLength, overlapFactor, dan order
     frameLength = 80;
     overlapFactor = 0;
-    order = 20;
+    order = 10;
 
     % Menghitung jumlah frame
     numFrames = ceil(length(x)/(frameLength*(1-overlapFactor)));
