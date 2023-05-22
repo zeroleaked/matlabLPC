@@ -5,19 +5,17 @@ function A = my_toeplitz(r)
 % Outputs:
 %   - A: matriks Toeplitz
 
-% Menentukan ukuran matriks Toeplitz
-n = length(r);
-
-% Membuat matriks Toeplitz menggunakan for loop
-A = zeros(n,n);
-for i = 1:n
-    for j = 1:n
-        if j <= i
-            A(i,j) = r(i-j+1);
-        else
-            A(i,j) = r(j-i+1);
-        end
-    end
-end
+A = [
+    [x(1) x(2) x(3) x(4) x(5) x(6) x(7) x(8) x(9) x(10)]
+    [x(2) x(1) x(2) x(3) x(4) x(5) x(6) x(7) x(8) x(9)]
+    [x(3) x(2) x(1) x(2) x(3) x(4) x(5) x(6) x(7) x(8)]
+    [x(4) x(3) x(2) x(1) x(2) x(3) x(4) x(5) x(6) x(7)]
+    [x(5) x(4) x(3) x(2) x(1) x(2) x(3) x(4) x(5) x(6)]
+    [x(6) x(5) x(4) x(3) x(2) x(1) x(2) x(3) x(4) x(5)]
+    [x(7) x(6) x(5) x(4) x(3) x(2) x(1) x(2) x(3) x(4)]
+    [x(8) x(7) x(6) x(5) x(4) x(3) x(2) x(1) x(2) x(3)]
+    [x(9) x(8) x(7) x(6) x(5) x(4) x(3) x(2) x(1) x(2)]
+    [x(10) x(9) x(8) x(7) x(6) x(5) x(4) x(3) x(2) x(1)]
+]
 
 end

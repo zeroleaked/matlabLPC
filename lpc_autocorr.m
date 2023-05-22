@@ -8,10 +8,10 @@ function [a, e] = lpc_autocorr(x)
     
     % Compute autocorrelation vector   
     p = 10;
-    R = my_autocorr(x, p);
+    R = my_autocorr(x);
 
     % Construct autocorrelation matrix
-    Rmat = my_toeplitz(R(p+1:end-1));
+    Rmat = my_toeplitz(R(1:end-1));
 
     % Construct target vector
     r = R(p:-1:1);

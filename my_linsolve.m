@@ -7,31 +7,22 @@ function x = my_linsolve(A,b)
 % Outputs:
 %   - x: Vektor solusi
 
-% Menentukan ukuran matriks koefisien
-n = size(A,1);
-
 % Membentuk matriks augmented
 aug = [A,b];
 
 % Melakukan eliminasi gauss matriks augmentasi untuk menghasilkan matriks augmented tereduksi
 % ke bentuk eselon baris
-for i = 1:n-1
-    % Mencari elemen pivot
-    pivot = aug(i,i);
-    % if pivot == 0
-    %     error('Matrix singular');
-    % end
-
+for j = 2:10
     % Mengeliminasi elemen di bawah pivot
-    for j = i+1:n
-        factor = aug(j,i)/pivot;
+    for i = 1:j-1
+        factor = aug(j,i)/aug(i,i);
         aug(j,:) = aug(j,:) - factor*aug(i,:);
     end
 end
 
 % Substitusi balik untuk mendapatkan solusi
-x = zeros(n,1);
-x(n) = aug(n,n+1)/aug(n,n);
+x = zeros(10,1);
+x(10) = aug(n,n+1)/aug(n,n);
 for i = n-1:-1:1
     temp = aug(i,i+1:n)*x(i+1:n);
     numerator = aug(i,n+1) - temp;
