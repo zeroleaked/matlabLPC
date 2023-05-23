@@ -6,6 +6,7 @@
 speechSignal = mean(speechSignal, 2);
 
 [reconstSignal, residue] = analysis_synthesis(speechSignal);
+residue = reshape(residue.',[], 1);
 
 % y = transpose(y);
 
@@ -23,3 +24,6 @@ subplot(3,1,1); plot(t, speechSignal); xlabel('Time (s)'); ylabel('Amplitude');
 title('Original Speech Signal');
 subplot(3,1,2); plot(tr, reconstSignal); xlabel('Time (s)'); ylabel('Amplitude');
 title('Reconstructed Speech Signal');
+subplot(3,1,3); plot(tr, residue); xlabel('Time (s)'); ylabel('Amplitude');
+title('Residue');
+
