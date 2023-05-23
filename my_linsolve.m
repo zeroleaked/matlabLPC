@@ -8,7 +8,7 @@ function x = my_linsolve(A,b)
 %   - x: Vektor solusi
 
 % Membentuk matriks augmented
-aug = [A,b];
+aug = [A,b'];
 
 % Melakukan eliminasi gauss matriks augmentasi untuk menghasilkan matriks augmented tereduksi
 % ke bentuk eselon baris
@@ -20,6 +20,7 @@ for j = 2:10
     end
 end
 
+n=10;
 % Substitusi balik untuk mendapatkan solusi
 x = zeros(10,1);
 x(10) = aug(n,n+1)/aug(n,n);
