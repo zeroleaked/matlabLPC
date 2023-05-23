@@ -5,7 +5,8 @@
 [speechSignal, Fs] = audioread('speech_4k.wav');
 speechSignal = mean(speechSignal, 2);
 
-reconstSignal = analysis_synthesis(speechSignal);
+[reconstSignal, residue] = analysis_synthesis(speechSignal);
+residue = reshape(residue.',[], 1);
 
 % y = transpose(y);
 
@@ -19,7 +20,10 @@ audiowrite('out.wav',reconstSignal,Fs)
 % Membuat plot sinyal original dan hasil rekonstruksi
 t = (0:length(speechSignal)-1) / Fs;
 tr = (0:length(reconstSignal)-1) / Fs;
-subplot(2,1,1); plot(t, speechSignal); xlabel('Time (s)'); ylabel('Amplitude');
+subplot(3,1,1); plot(t, speechSignal); xlabel('Time (s)'); ylabel('Amplitude');
 title('Original Speech Signal');
-subplot(2,1,2); plot(tr, reconstSignal); xlabel('Time (s)'); ylabel('Amplitude');
+subplot(3,1,2); plot(tr, reconstSignal); xlabel('Time (s)'); ylabel('Amplitude');
 title('Reconstructed Speech Signal');
+subplot(3,1,3); plot(tr, residue); xlabel('Time (s)'); ylabel('Amplitude');
+title('Reconstructed Speech Signal');
+

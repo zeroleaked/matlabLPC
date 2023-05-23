@@ -1,4 +1,4 @@
-function y = analysis_synthesis(x)
+function [y, residue] = analysis_synthesis(x)
 
     % mengatur frameLength, overlapFactor, dan order
     frameLength = 80;
@@ -34,6 +34,7 @@ function y = analysis_synthesis(x)
     end
 
     reconstructedSignalNew = zeros(numFrames, frameLength);
+    residue = errorSignalNew;
 
     % Melakukan inversi filter untuk mendapatkan sinyal suara yang telah direkonstruksi
     for i = 1:numFrames
