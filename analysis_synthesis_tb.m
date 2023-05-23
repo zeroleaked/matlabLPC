@@ -5,7 +5,7 @@
 [speechSignal, Fs] = audioread('speech_4k.wav');
 speechSignal = mean(speechSignal, 2);
 
-reconstSignal = analysis_synthesis(speechSignal);
+[reconstSignal, residue] = analysis_synthesis(speechSignal);
 
 % y = transpose(y);
 
