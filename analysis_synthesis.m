@@ -3,7 +3,7 @@ function [y, residue] = analysis_synthesis(x)
     % mengatur frameLength, overlapFactor, dan order
     frameLength = 80;
     overlapFactor = 0;
-    order = 20;
+    order = 10;
 
     % Menghitung jumlah frame
     numFrames = ceil(length(x)/(frameLength*(1-overlapFactor)));
@@ -26,7 +26,7 @@ function [y, residue] = analysis_synthesis(x)
 
         currentFrame = x(startIdx:endIdx);
         % Mencari koefisien LPC untuk frame yang sedang dianalisis
-        [lpcCoeffs(i,:)] = lpc_autocorr(currentFrame);
+        [lpcCoeffs(i,:)] = lpc_autocorr(currentFrame, order);
 
         % Mencari nilai error untuk masing-masing frame
         frameError = my_filter(lpcCoeffs(i,:), 1, currentFrame');

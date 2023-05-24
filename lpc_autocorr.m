@@ -1,4 +1,4 @@
-function [a, e] = lpc_autocorr(x)
+function [a, e] = lpc_autocorr(x, p)
     % Computes the LPC coefficients using the autocorrelation method
     % Inputs:
     %   x: input signal (column vector)
@@ -7,7 +7,6 @@ function [a, e] = lpc_autocorr(x)
     %   e: prediction error variance
     
     % Compute autocorrelation vector   
-    p = 20;
     R = my_autocorr(x, p);
 
     % Construct autocorrelation matrix
