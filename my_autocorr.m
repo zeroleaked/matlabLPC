@@ -14,7 +14,9 @@ r = zeros(1, 2*maxlag+1);
 % Menggunakan for loop untuk menghitung autokorelasi
 for k = 1:2*maxlag+1
     for i=1:N
-        r(k) = r(k) + x(i) * x(mod(i+lags(k), N));
+        shift = mod(i+lags(k), N);
+        if shift==0, shift=N; end
+        r(k) = r(k) + x(i) * x(shift);
     end
 end
 % Normalisasi nilainya
