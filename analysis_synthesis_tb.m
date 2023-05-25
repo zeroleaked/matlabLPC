@@ -13,7 +13,8 @@ residue = reshape(residue.',[], 1);
 % Memainkan sinyal suara yang telah direkonstruksi
 % sound(speechSignal, Fs);
 pause(length(speechSignal)/Fs);
-sound(reconstSignal,Fs);
+% sound(reconstSignal,Fs);
+sound(residue, Fs);
 
 audiowrite('out.wav',reconstSignal,Fs)
 % filter 
