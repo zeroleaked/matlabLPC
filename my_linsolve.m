@@ -18,9 +18,9 @@ aug = [A,b];
 for i = 1:n-1
     % Mencari elemen pivot
     pivot = aug(i,i);
-    % if pivot == 0
-    %     error('Matrix singular');
-    % end
+    if pivot == 0
+        error('Matrix singular');
+    end
 
     % Mengeliminasi elemen di bawah pivot
     for j = i+1:n
@@ -33,9 +33,7 @@ end
 x = zeros(n,1);
 x(n) = aug(n,n+1)/aug(n,n);
 for i = n-1:-1:1
-    temp = aug(i,i+1:n)*x(i+1:n);
-    numerator = aug(i,n+1) - temp;
-    x(i) = numerator/aug(i,i);
+    x(i) = (aug(i,n+1) - aug(i,i+1:n)*x(i+1:n))/aug(i,i);
 end
 
 end

@@ -13,10 +13,15 @@ r = zeros(1, 2*maxlag+1);
 
 % Menggunakan for loop untuk menghitung autokorelasi
 for k = 1:2*maxlag+1
-    for i=1:N
-        shift = mod(i+lags(k), N);
-        if shift==0, shift=N; end
-        r(k) = r(k) + x(i) * x(shift);
+        % korelasi beberapa lag pertama
+    if lags(k) < 0
+        r(k) = sum(x(1:N+lags(k)) .* x(-lags(k)+1:N));
+        % korelasi beberapa lag terakhir
+    elseif lags(k) > 0
+        r(k) = sum(x(1:N-lags(k)) .* x(lags(k)+1:N));
+        % korelasi saat kedua sinyal overlap
+    else
+        r(k) = sum(x .* x);
     end
 end
 % Normalisasi nilainya
