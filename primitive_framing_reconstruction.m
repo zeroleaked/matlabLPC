@@ -1,7 +1,7 @@
 % mengatur frameLength, overlapFactor, dan order
 frameLength = 80;
 overlapFactor = 0;
-order = 20;
+order = 10;
 
 % Membaca sinyal suara dari file .wav dan mengubah menjadi mono
 [speechSignal, Fs] = audioread('speech_4k.wav');
@@ -56,7 +56,7 @@ startIdx = round(frameLength*(1-overlapFactor))+1;
 endIdx = length(speechSignal);
 reconstructedSignalNew(startIdx:endIdx) = reconstructedSignalNew(startIdx:endIdx) + errorSignalNew(startIdx:endIdx);
 
-error = errorSignalNew(:);
+error = reshape(errorSignalNew',[],1);
 
 sound(speechSignal, Fs);
 pause(length(speechSignal)/Fs);
@@ -71,3 +71,29 @@ subplot(3,1,2); plot(tr, reconstSignalNewOneD); xlabel('Time (s)'); ylabel('Ampl
 title('Reconstructed Speech Signal (MATLAB Function)');
 subplot(3,1,3); plot(tr, error); xlabel('Time (s)'); ylabel('Amplitude');
 title('Error');
+
+% Residual analysis
+figure()
+input_power = speechSignal.^2;
+input_power_frame = zeros(length(error), 1);
+input_power_frame(1:length(input_power)) = input_power;
+input_power_frame = reshape(input_power_frame, frameLength, numFrames);
+input_power_frame = mean(input_power_frame);
+subplot(3,1,1);
+plot(1:numFrames, input_power_frame);
+title('input power');
+
+residual_power = error.^2;
+residual_power_frame = reshape(residual_power, frameLength, numFrames);
+residual_power_frame = mean(residual_power_frame);
+subplot(3,1,2);
+plot(1:numFrames, residual_power_frame);
+title('residual power');
+
+power_ratio = residual_power_frame ./ input_power_frame * 100;
+subplot(3,1,3);
+plot(1:numFrames, power_ratio);
+ytickformat('percentage');
+title('residual power / input power');
+
+sgtitle('baseline, 10 pole, no circ buffer');
