@@ -8,17 +8,18 @@ function [a, e, R] = lpc_autocorr(x, p)
     %   e: prediction error variance
     
     % Compute autocorrelation vector
-    R = xcorr(x, p, 'biased');
+    R = my_autocorr(x, p);
     
     
     % Construct autocorrelation matrix
-    Rmat = toeplitz(R(p+1:end-1));
+    Rmat = my_toeplitz(R(1:end-1));
 
     % Construct target vector
-    r = R(p:-1:1);
+    r = R(2:end);
     
     % Solve for LPC coefficients
-    a = [1; linsolve(Rmat, r)];
+    a = [1; my_linsolve(Rmat, r)];
     a(2:end) = -a(2:end);
-    e = R(1) - sum(R(2:p+1) .* a(1:p));
+    temp = R(2:p+1)' * a(1:p);
+    e = R(1) - temp;
 end

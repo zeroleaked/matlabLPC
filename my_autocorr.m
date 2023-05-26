@@ -9,21 +9,12 @@ function [r, lags] = my_autocorr(x, maxlag)
 
 N = length(x);
 lags = -maxlag:maxlag;
-r = zeros(1, 2*maxlag+1);
+r = zeros(1, maxlag+1);
 
-% Menggunakan for loop untuk menghitung autokorelasi
-for k = 1:2*maxlag+1
-        % korelasi beberapa lag pertama
-    if lags(k) < 0
-        r(k) = sum(x(1:N+lags(k)) .* x(-lags(k)+1:N));
-        % korelasi beberapa lag terakhir
-    elseif lags(k) > 0
-        r(k) = sum(x(1:N-lags(k)) .* x(lags(k)+1:N));
-        % korelasi saat kedua sinyal overlap
-    else
-        r(k) = sum(x .* x);
-    end
+for i = 1:maxlag+1
+    r(i) = x(i:end)' * x(1:end-i+1);
 end
+
 % Normalisasi nilainya
 r = transpose(r/N);
 
