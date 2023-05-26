@@ -96,4 +96,4 @@ plot(1:numFrames, power_ratio);
 ytickformat('percentage');
 title('residual power / input power');
 
-sgtitle('baseline, 10 pole, no circ buffer');
+sgtitle('10 pole, buff circ');
