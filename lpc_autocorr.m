@@ -1,11 +1,10 @@
-function [a, e, R] = lpc_autocorr(x, p)
+function [a, residue] = lpc_autocorr(x, p)
     % Computes the LPC coefficients using the autocorrelation method
     % Inputs:
     %   x: input signal (column vector)
     %   p: order of LPC analysis
     % Outputs:
     %   a: LPC coefficients (column vector)
-    %   e: prediction error variance
     
     % Compute autocorrelation vector
     R = my_autocorr(x, p);
@@ -20,6 +19,6 @@ function [a, e, R] = lpc_autocorr(x, p)
     % Solve for LPC coefficients
     a = [1; my_linsolve(Rmat, r)];
     a(2:end) = -a(2:end);
-    temp = R(2:p+1)' * a(1:p);
-    e = R(1) - temp;
+    residue = my_conv(a, x);
+    residue = residue(1:80);
 end
