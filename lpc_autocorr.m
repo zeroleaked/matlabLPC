@@ -20,5 +20,6 @@ function [a, e, R] = lpc_autocorr(x, p)
     % Solve for LPC coefficients
     a = [1; my_linsolve(Rmat, r)];
     a(2:end) = -a(2:end);
-    e = R(1) - sum(R(2:p+1) .* a(1:p));
+    temp = R(2:p+1)' * a(1:p);
+    e = R(1) - temp;
 end

@@ -10,13 +10,11 @@ function [r, lags] = my_autocorr(x, maxlag)
 N = length(x);
 r = zeros(1, maxlag+1);
 
-% Menggunakan for loop untuk menghitung autokorelasi
-for k = 1:maxlag+1
-    for i=1:N
-        shift = mod(i-k, N) + 1;
-        r(k) = r(k) + x(i) * x(shift);
-    end
+for i = 1:maxlag+1
+    r(i) = x(i:end)' * x(1:end-i+1);
+
 end
+
 % Normalisasi nilainya
 r = transpose(r/N);
 

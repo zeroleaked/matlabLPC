@@ -63,6 +63,7 @@ pause(length(speechSignal)/Fs);
 sound(reconstSignalNewOneD,Fs);
 
 % Membuat plot sinyal original dan hasil rekonstruksi
+figure()
 t = (0:length(speechSignal)-1) / Fs;
 tr = (0:length(reconstSignalNewOneD)-1) / Fs;
 subplot(3,1,1); plot(t, speechSignal); xlabel('Time (s)'); ylabel('Amplitude');
