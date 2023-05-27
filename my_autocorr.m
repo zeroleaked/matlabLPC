@@ -8,15 +8,17 @@ function [r, lags] = my_autocorr(x, maxlag)
 %   - lags: time lags yang diasosiasikan dengan setiap nilai korelasi
 
 N = length(x);
+r_local = zeros(1, maxlag+1);
 r = zeros(1, maxlag+1);
 output_length = maxlag+1;
 
 for i = 1:output_length
-    r(i) = x(i:end)' * x(1:end-i+1);
-
+    for j = 1:length(x)-i+1
+        r_local(i) = r_local(i) + x(j) * x(i+j-1);
+    end
 end
 
 % Normalisasi nilainya
-r = transpose(r/N);
+r = transpose(r_local/N);
 
 end
