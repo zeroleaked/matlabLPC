@@ -38,12 +38,14 @@ end
 audiowrite("out.wav", reconstructed(:), Fs);
 
 % Membuat plot sinyal original dan hasil rekonstruksi
+reconstructed_toplot = reconstructed(:);
+reconstructed_toplot = max(min(reconstructed_toplot,1),-1);
 figure()
 t = (0:frameLength*numFrames-1) / Fs;
 s = 1:frameLength*numFrames;
 subplot(3,1,1); plot(s, input_frame(:)); xlabel('Time (s)'); ylabel('Amplitude');
 title('Original Speech Signal');
-subplot(3,1,2); plot(s, reconstructed(:)); xlabel('Time (s)'); ylabel('Amplitude');
+subplot(3,1,2); plot(s, reconstructed_toplot); xlabel('Time (s)'); ylabel('Amplitude');
 title('Reconstructed Speech Signal');
 subplot(3,1,3); plot(s, residue(:)); xlabel('Time (s)'); ylabel('Amplitude');
 title('Error');
