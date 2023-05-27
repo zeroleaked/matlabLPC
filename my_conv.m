@@ -12,8 +12,9 @@ function y = my_conv(b, x)
     % Melakukan proses konvolusi sesuai definisinya untuk sinyal diskret
     for n = 1:lenY
         for k = 1:lenB
-            shift = mod(n - k, lenX) + 1;
-            y(n) = y(n) + b(k) * x(shift);
+            if n - k + 1 > 0 && n - k + 1 <= lenX
+                y(n) = y(n) + b(k) * x(n - k + 1);
+            end
         end
     end
 end
