@@ -9,6 +9,8 @@ speechSignal = mean(speechSignal, 2);
 speechSignal = resample(speechSignal, samplingFrequency, Fs);
 Fs = samplingFrequency;
 
+%speechSignal = speechSignal(17281:17440);
+
 % Menghitung jumlah frame
 numFrames = ceil(length(speechSignal)/frameLength);
 
@@ -24,7 +26,7 @@ input_frame = reshape(input_frame, frameLength, numFrames);
 % Menganalisis masing-masing frame
 for i = 1:numFrames
     % Mencari koefisien LPC untuk frame yang sedang dianalisis
-    [lpcCoeffs(:,i), residue(:,i)] = lpc_autocorr(input_frame(:,i), order);
+    [lpcCoeffs(:,i), residue(:,i)] = lpc_autocorr(input_frame(:,i));
 end
 
 reconstructed = zeros(frameLength, numFrames);
@@ -38,11 +40,12 @@ audiowrite("out.wav", reconstructed(:), Fs);
 % Membuat plot sinyal original dan hasil rekonstruksi
 figure()
 t = (0:frameLength*numFrames-1) / Fs;
-subplot(3,1,1); plot(t, input_frame(:)); xlabel('Time (s)'); ylabel('Amplitude');
+s = 1:frameLength*numFrames;
+subplot(3,1,1); plot(s, input_frame(:)); xlabel('Time (s)'); ylabel('Amplitude');
 title('Original Speech Signal');
-subplot(3,1,2); plot(t, reconstructed(:)); xlabel('Time (s)'); ylabel('Amplitude');
+subplot(3,1,2); plot(s, reconstructed(:)); xlabel('Time (s)'); ylabel('Amplitude');
 title('Reconstructed Speech Signal');
-subplot(3,1,3); plot(t, residue(:)); xlabel('Time (s)'); ylabel('Amplitude');
+subplot(3,1,3); plot(s, residue(:)); xlabel('Time (s)'); ylabel('Amplitude');
 title('Error');
 
 % Residual analysis

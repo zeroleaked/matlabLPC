@@ -1,13 +1,15 @@
-function [a, residue] = lpc_autocorr(x, p)
+function [a, residue] = lpc_autocorr(x)
     % Computes the LPC coefficients using the autocorrelation method
     % Inputs:
     %   x: input signal (column vector)
     %   p: order of LPC analysis
     % Outputs:
     %   a: LPC coefficients (column vector)
+    p = 10;
+    x_len = 160;
     
     % Compute autocorrelation vector
-    R = my_autocorr(x, p);
+    R = my_autocorr(x, p, x_len);
     
     
     % Construct autocorrelation matrix
