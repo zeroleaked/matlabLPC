@@ -21,6 +21,6 @@ function [a, residue] = lpc_autocorr(x)
     % Solve for LPC coefficients
     a = [1; my_linsolve(Rmat, r)];
     a(2:end) = -a(2:end);
-    residue = my_conv(a, x);
-    residue = residue(1:length(x));
+    residue = my_conv(a, x, p+1, x_len);
+    residue = residue(1:x_len);
 end

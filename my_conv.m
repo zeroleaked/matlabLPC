@@ -1,8 +1,4 @@
-function y = my_conv(b, x)
-    % Menentukan panjang sinyal b dan x
-    lenB = length(b);
-    lenX = length(x);
-    
+function y = my_conv(b, x, lenB, lenX)
     % Menentukan panjang sinyal hasil konvolusi
     lenY = lenB + lenX - 1;
     
