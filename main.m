@@ -1,5 +1,5 @@
 % Top level params
-frameLength = 80;
+frameLength = 160;
 order = 10;
 samplingFrequency = 8000;
 

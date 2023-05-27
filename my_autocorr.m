@@ -1,4 +1,4 @@
-function [r, lags] = my_autocorr(x, maxlag)
+function r = my_autocorr(x, maxlag)
 % Menghitung Autokorelasi dari sinyal x sampai dengan maxlag lag value menggunakan konstruk dasar
 % Inputs:
 %   - x: sinyal pertama
@@ -9,7 +9,6 @@ function [r, lags] = my_autocorr(x, maxlag)
 
 N = length(x);
 r_local = zeros(1, maxlag+1);
-r = zeros(1, maxlag+1);
 output_length = maxlag+1;
 
 for i = 1:output_length
