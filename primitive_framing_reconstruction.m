@@ -30,11 +30,8 @@ for i = 1:numFrames
 
     currentFrame = speechSignal(startIdx:endIdx);
     % Mencari koefisien LPC untuk frame yang sedang dianalisis
-    lpcCoeffs(i,:) = lpc_autocorr(currentFrame, order);
+    [lpcCoeffs(i,:), frameError] = lpc_autocorr(currentFrame, order);
     
-    % Mencari nilai error untuk masing-masing frame
-    frameError = my_conv(lpcCoeffs(i,:), currentFrame);
-    frameError = frameError(1:80); % menetapkan panjang frame error menjadi 80
     errorSignalNew(i,:) = transpose(frameError);
 end
 

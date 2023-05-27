@@ -9,8 +9,9 @@ function [r, lags] = my_autocorr(x, maxlag)
 
 N = length(x);
 r = zeros(1, maxlag+1);
+output_length = maxlag+1;
 
-for i = 1:maxlag+1
+for i = 1:output_length
     r(i) = x(i:end)' * x(1:end-i+1);
 
 end
