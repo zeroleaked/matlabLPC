@@ -20,5 +20,5 @@ function [a, residue] = lpc_autocorr(x, p)
     a = [1; my_linsolve(Rmat, r)];
     a(2:end) = -a(2:end);
     residue = my_conv(a, x);
-    residue = residue(1:80);
+    residue = residue(1:length(x));
 end

@@ -1,10 +1,13 @@
 % Top level params
 frameLength = 80;
 order = 10;
+samplingFrequency = 4000;
 
 % Membaca sinyal suara dari file .wav dan mengubah menjadi mono
-[speechSignal, Fs] = audioread('speech_4k.wav');
+[speechSignal, Fs] = audioread('elektro.wav');
 speechSignal = mean(speechSignal, 2);
+speechSignal = resample(speechSignal, samplingFrequency, Fs);
+Fs = samplingFrequency;
 
 % Menghitung jumlah frame
 numFrames = ceil(length(speechSignal)/frameLength);
@@ -27,7 +30,7 @@ end
 reconstructed = zeros(frameLength, numFrames);
 % Melakukan inversi filter untuk mendapatkan sinyal suara yang telah direkonstruksi
 for i = 1:numFrames
-    reconstructed(:,i) = iirFilter(lpcCoeffs(:,1), residue(:,i));
+    reconstructed(:,i) = iirFilter(lpcCoeffs(:,i), residue(:,i));
 end
 
 % Membuat plot sinyal original dan hasil rekonstruksi
