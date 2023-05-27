@@ -1,7 +1,7 @@
 % Top level params
 frameLength = 80;
 order = 10;
-samplingFrequency = 4000;
+samplingFrequency = 8000;
 
 % Membaca sinyal suara dari file .wav dan mengubah menjadi mono
 [speechSignal, Fs] = audioread('elektro.wav');
@@ -32,6 +32,8 @@ reconstructed = zeros(frameLength, numFrames);
 for i = 1:numFrames
     reconstructed(:,i) = iirFilter(lpcCoeffs(:,i), residue(:,i));
 end
+
+audiowrite("out.wav", reconstructed(:), Fs);
 
 % Membuat plot sinyal original dan hasil rekonstruksi
 figure()
