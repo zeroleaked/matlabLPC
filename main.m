@@ -9,7 +9,7 @@ speechSignal = mean(speechSignal, 2);
 speechSignal = resample(speechSignal, samplingFrequency, Fs);
 Fs = samplingFrequency;
 
-%speechSignal = speechSignal(17281:17440);
+%speechSignal = speechSignal(15361:15680);
 
 % Menghitung jumlah frame
 numFrames = ceil(length(speechSignal)/frameLength);

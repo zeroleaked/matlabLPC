@@ -11,7 +11,12 @@ function y = reduce(echelon_row, presolved, result, pivot)
 % ke bentuk eselon baris
 
 % Substitusi balik untuk mendapatkan solusi
-solved = echelon_row * presolved;
+solved = 0;
+for i = 1:length(echelon_row)
+    prod = echelon_row(i) * presolved(i);
+    solved = solved + prod;
+end
+%solved = echelon_row * presolved;
 denom = result - solved;
 y = denom / pivot;
 
