@@ -7,7 +7,6 @@ function r = my_autocorr(x)
 %   - r : hasil autokorelasi
 %   - lags: time lags yang diasosiasikan dengan setiap nilai korelasi
 r_local = zeros(1, 11);
-output_length = 11;
 
 for i = 1:11
     for j = 1:160-i+1
