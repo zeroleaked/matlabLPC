@@ -1,28 +1,26 @@
 function echelon = gauss_elim(aug)
 % Menyelesaikan sistem persamaan linear Ax = b
-% menggunakan konstruk pemrograman dasar
 % Inputs:
-%   - A: Matriks koefisien
-%   - b: vektor ruas kanan
+%   - A: Matriks augmentasi
 % Outputs:
 %   - x: Vektor solusi
 
 % Menentukan ukuran matriks koefisien
 echelon = aug;
-n = 10;
 
-% Melakukan eliminasi gauss matriks augmentasi untuk menghasilkan matriks augmented tereduksi
-% ke bentuk eselon baris
-for i = 1:n-1
-    % Mencari elemen pivot
+for i = 1:9 %pivots
     pivot = echelon(i,i);
-
-    % Mengeliminasi elemen di bawah pivot
-    for j = i+1:n
-        factor = echelon(j,i)/pivot;
-        eliminator = factor*echelon(i,:);
-        echelon(j,:) = echelon(j,:) - eliminator;
+    for j = i+1:10 %targets to eliminate
+        target = echelon(j,i);
+        factor = target/pivot;
+        for k = i+1:11
+            pivot_row = echelon(i,k);
+            target_row = echelon(j,k);
+            echelon(j,k) = target_row - pivot_row * factor;
+        end
     end
 end
+
+
 
 end
