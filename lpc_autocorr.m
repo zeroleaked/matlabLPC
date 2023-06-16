@@ -11,13 +11,8 @@ function [a, residue] = lpc_autocorr(x)
     % Compute autocorrelation vector
     R = my_autocorr(x);
     
-    
-    % Construct autocorrelation matrix
-    aug = my_toeplitz(R);
-    
     % Solve for LPC coefficients
-    a = [1; my_linsolve(aug)];
-    a(2:end) = -a(2:end);
+    a = durbin(R(1), R(2:11), 10);
 
     residue = my_conv(a, x, p+1, x_len);
     residue = residue(1:x_len);
